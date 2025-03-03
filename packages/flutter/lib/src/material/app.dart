@@ -63,7 +63,16 @@ enum ThemeMode {
   light,
 
   /// Always use the dark mode (if available) regardless of system preference.
-  dark,
+  dark;
+
+  /// parse the string [theme] to [ThemeMode] and use [defaultTheme] if it can't parse [theme]
+  /// [theme] must be 'light' for [ThemeMode.light] and 'dark' for [ThemeMode.dark] and any other value for [ThemeMode.system]
+  static ThemeMode parse({required String theme, ThemeMode defaultTheme = ThemeMode.system}) =>
+      switch (theme.toLowerCase()) {
+        'light' => ThemeMode.light,
+        'dark' => ThemeMode.dark,
+        _ => defaultTheme,
+      };
 }
 
 /// An application that uses Material Design.
